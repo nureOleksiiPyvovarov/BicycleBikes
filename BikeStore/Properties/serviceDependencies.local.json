@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "secrets1": {
+      "type": "secrets.user"
+    },
+    "mssql1": {
+      "type": "mssql.local",
+      "connectionId": "BikeStoreConnection",
+      "secretStore": "LocalSecretsFile"
+    },
+    "mssql2": {
+      "type": "mssql.onprem",
+      "connectionId": "BikeStoreDb",
+      "secretStore": "LocalSecretsFile"
+    }
+  }
+}

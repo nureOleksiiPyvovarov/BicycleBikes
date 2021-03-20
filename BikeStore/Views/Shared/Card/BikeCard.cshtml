@@ -1,0 +1,56 @@
+﻿
+@model BikeCardViewModel
+
+<div class="col-md-4">
+    <div class="card mb-4 border-dark">
+        <img class="card-img-top" src="@Model.ProductPhoto" alt="Card image cap" asp-append-version="true">
+        <div class="card-body">
+            <div>
+                <h5 class="card-title">@Model.ProductName</h5>
+                <h5>@Model.ListPrice$</h5>
+            </div>
+            <p class="card-text">Good model from @Model.Brand in <a asp-controller="Bikes" asp-action="BikesByCategory" asp-route-category="@Model.Category">@Model.Category</a> category.</p>
+            <div class="text-center">
+                <form method="post" asp-controller="ShoppingCart" asp-action="AddToShoppingCart" asp-route-id="@Model.ProductId">
+                    <button type="submit" class="btn btn-outline-primary m-1 btn-lg" style="width: auto">
+                        Add to card
+                    </button>
+                </form>
+                <a asp-controller="Bikes" asp-action="Details" asp-route-id="@Model.ProductId"
+                   class="btn btn-outline-primary m-1" id="BikeCardBtn">View</a>
+                @if (User.IsInRole("Admin"))
+                {
+                    <a asp-controller="Bikes" asp-action="Update" asp-route-id="@Model.ProductId"
+                       class="btn btn-outline-secondary m-1" id="BikeCardBtn">Edit</a>
+                    <a asp-controller="Bikes" asp-action="Delete" asp-route-id="@Model.ProductId"
+                       class="btn btn-outline-danger m-1" id="BikeCardBtn">Delete</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/js/site.js" asp-append-version="true"></script>
+}
+@*<div class="col-lg-4 col-md-6 mb-4">
+        <div class="card h-100">
+            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <div class="card-body">
+                <h4 class="card-title">
+                    <a href="#">@Model.Product.ProductName</a>
+                </h4>
+                <h5>@Model.Category.CategoryName</h5>
+                <h5>@Model.Brand.BrandName</h5>
+                <h5>@Model.Product.ListPrice$</h5>
+            </div>
+            <div class="card-footer text-center">
+                <a asp-controller="Home" asp-action="DetailsOfBike" asp-route-id="@Model.Product.ProductId"
+                   class="btn btn-primary btn-block" id="BikeCardBtn">View</a>
+                <a asp-controller="Home" asp-action="EditBike" asp-route-id="@Model.Product"
+                   class="btn btn-secondary" id="BikeCardBtn">Edit</a>
+                <a asp-controller="Home" asp-action="DeleteBike" asp-route-id="@Model.Product.ProductId"
+                   class="btn btn-danger" id="BikeCardBtn">Delete</a>
+            </div>
+        </div>
+    </div>*@
+

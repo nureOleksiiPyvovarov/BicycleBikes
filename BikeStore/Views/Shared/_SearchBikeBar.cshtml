@@ -1,0 +1,10 @@
+﻿@model IndexModel
+<form method="get" asp-controller="Home" asp-action="Index">
+    <div class="input-group mb-2 col-md-6 offset-3 pr-0">
+        <input class="form-control" asp-for="@Model.SearchingString" placeholder="Input bike name">
+    </div>
+    <div class="input-group mb-3 col-md-2 offset-5 pr-0">
+        <button class="btn btn-primary" type="submit">Search</button>
+    </div>
+</form>
+

@@ -1,0 +1,35 @@
+﻿
+@model BikeCardViewModel
+
+<div>
+    <div class="card mt-4">
+        <img class="card-img-top img-fluid" src="@Model.ProductPhoto" asp-append-version="true">
+        <div class="card-body">
+            <h3 class="card-title">@Model.ProductName</h3>
+            <h4>$@Model.ListPrice</h4>
+            <p class="card-text">
+                Good model from @Model.Brand in
+                <a asp-controller="Bikes" asp-action="BikesByCategory" asp-route-category="@Model.Category">@Model.Category</a> category.<br />
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!
+
+            </p>
+            <div class="text-center">
+                <form method="post" asp-controller="ShoppingCart" asp-action="AddToShoppingCart" asp-route-id="@Model.ProductId">
+                    <button type="submit" class="btn btn-outline-primary m-1 btn-lg" style="width: auto">
+                        Add to card
+                    </button>
+                </form>
+                <a asp-controller="Home" asp-action="Index"
+                   class="btn btn-outline-dark m-1" id="BikeCardBtn">See all</a>
+                @if (User.IsInRole("Admin"))
+                {
+                    <a asp-controller="Bikes" asp-action="Update" asp-route-id="@Model.ProductId"
+                       class="btn btn-outline-secondary m-1" id="BikeCardBtn">Edit</a>
+                    <a asp-controller="Bikes" asp-action="Delete" asp-route-id="@Model.ProductId"
+                       class="btn btn-outline-danger m-1" id="BikeCardBtn">Delete</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

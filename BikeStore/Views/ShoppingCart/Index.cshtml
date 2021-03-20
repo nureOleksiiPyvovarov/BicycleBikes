@@ -1,0 +1,57 @@
+﻿@using System.Net
+@model ShoppingCartViewModel
+@inject UserManager<UserIdentityModel> UserManager
+@{ var user = await UserManager.GetUserAsync(User);}
+
+<div>
+    <h2>Your shopping cart</h2>
+    <h4>Here are the bikes in your shopping cart.</h4>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Selected amount</th>
+                <th>Bike</th>
+                <th class="text-right">Price</th>
+                <th class="text-right">Subtotal</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var line in Model.ShoppingCart.Items)
+            {
+                <tr>
+                    <td class="text-center">@line.Amount</td>
+                    <td class="text-left">@line.Product.ProductName</td>
+                    <td class="text-right">@line.Product.ListPrice$</td>
+                    <td class="text-right">
+                        @((line.Amount * line.Product.ListPrice))$
+                    </td>
+                    <td class="text-center">
+                        <form method="post" asp-controller="ShoppingCart" asp-action="RemoveFromShoppingCart" asp-route-id="@line.Product.ProductId">
+                            <button type="submit" class="btn-danger" style="width: auto">
+                                Delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-right">Total:</td>
+                <td class="text-right">
+                    @Model.ShoppingCartTotal$
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div class="text-left">
+        <form method="post" asp-controller="Orders" asp-action="Checkout" asp-route-id="@user.Id">
+            <button type="submit" class="btn btn-success" style="width: auto">
+                Checkout
+            </button>
+        </form>
+    </div>
+</div>
+

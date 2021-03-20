@@ -1,0 +1,23 @@
+﻿@model DeleteBikeViewModel
+
+    <form enctype="multipart/form-data" asp-controller="Bikes" asp-action="Delete" method="post">
+        <input hidden asp-for="ProductId" />
+        <input hidden asp-for="ProductName" />
+        <div class="form-group col-xl-12">
+            <div class="form-group row col-md-8">
+                <h3>Do you want to delete @Model.ProductName?</h3>
+            </div>
+            <div class="form-group row col-md-4">
+                <label>Enter bike name to <span class="text-danger">DELETE</span>:</label>
+                <input asp-for="ConfirmedName" class="form-control" />
+                <span asp-validation-for="ConfirmedName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group row col-md-12">
+                <div class="form-group col-md-4">
+                    <button type="submit" class="btn btn-danger m-1">Delete</button>
+                    <a asp-action="Index" asp-controller="Home" class="btn btn-primary m-1">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </form>

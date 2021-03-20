@@ -1,0 +1,28 @@
+﻿@model ShoppingCartViewModel
+
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+@inject SignInManager<UserIdentityModel> SignInManager
+@{
+    int amount = 0;
+    foreach (var item in Model.ShoppingCart.Items)
+    {
+        amount += item.Amount;
+    }
+}
+
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <li class="nav-item">
+        <a style="padding-top: 15px;" asp-controller="ShoppingCart" asp-action="Index" class="fas fa-shopping-cart nav-link"></a>
+    </li>
+    @*<li class="nav-item">
+        <a asp-controller="ShoppingCart" asp-action="Index" class="nav-link">
+            <span id="cart-status">
+                @amount
+            </span>
+        </a>
+    </li>*@
+}
+

@@ -1,0 +1,20 @@
+﻿@model IndexModel
+
+<body>
+<partial name="_Slider"/>
+<h3 class="mt-2 text-center mb-2" style="padding-right: 30px;">Get your bike</h3>
+<partial name="_SearchBikeBar"/>
+@if (Model.bikesList.Any())
+{
+    <div class="card-deck row">
+        @foreach (var product in Model.bikesList)
+        {
+            <partial name="Card/BikeCard" for="@product"/>
+        }
+    </div>
+}
+else
+{
+    <h3 class="m-1 text-center">Bikes with given name are not founded</h3>
+}
+</body>
